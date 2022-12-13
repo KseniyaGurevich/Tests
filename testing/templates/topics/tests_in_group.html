@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ group.title }}</title>
+</head>
+<body>
+  <h1>{{ group.title }}</h1>
+  <p>{{ group.description }}</p>
+  <hr>
+  {% for test in page_obj %}
+    <article>
+        <ul>
+            <li>
+                <a href="{% url 'topics:test_detail' test.id %}">
+                  {{ test.name }}
+                </a>
+            </li>
+        </ul>
+    <article>
+  {% endfor %}
+</body>
+</html>

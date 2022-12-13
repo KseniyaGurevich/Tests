@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список тем для тестирования</title>
+</head>
+<body>
+  <h1>Наборы тестов: </h1>
+  {% for group in page_obj %}
+  <article>
+      <ul>
+          <h3>
+            <a href="{% url 'topics:tests_in_group' group.slug %}">
+                {{ group.title }}
+            </a>
+          </h3>
+      </ul>
+  </article>
+  {% endfor %}
+</body>
+</html>
