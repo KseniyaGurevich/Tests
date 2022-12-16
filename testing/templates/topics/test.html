@@ -10,17 +10,7 @@
           <h3>{{ test.name }}</h3>
       </ul>
       <ul>
-          {% for q in questions %}
-            <form action="{% url 'topics:test_detail' test.id %}" method="post">
-              {% csrf_token %}
-              <h4> Вопрос : {{ q|linebreaksbr }}</h4>
-              <p> Варианты ответов: </p>
-              {% for answer in q.answers.all %}
-                <p><input type="radio" value={{answer}} name={{q}}/>{{ answer }}</p>
-              {% endfor %}
-              <button id="kn_sl" onclick="sled_vopr();">Следующий вопрос</button>
-            </form>
-          {% endfor %}
+          <a href="{% url 'topics:question_detail' test.id question.id %}"> Начать тест </a>
       </ul>
   </div>
 </body>

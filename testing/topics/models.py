@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.urls import reverse
 
 User = get_user_model()
 
@@ -57,7 +58,19 @@ class Question(models.Model):
     def __str__(self) -> str:
         return self.name
 
+    # def next_question(self, test_id):
+    #     next_question = Question.objects.filter(test_id=test_id, id__gt=self.id).order_by('id').first()
+    #     if next_question:
+    #         return reverse('test_detail', kwargs={'test_id': test_id, 'id': next_question.id})
+
+    def get_next(self):
+        return Question.objects.filter(id__gt=self.id).order_by('id').first()
+
+    # def get_absolute_url(self):
+    #     return reverse('topics:test_detail', args=[str(self.id)])
+
     class Meta:
+        ordering = ['id']
         verbose_name_plural = 'Вопросы'
 
 

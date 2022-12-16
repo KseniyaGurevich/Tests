@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+            <form action="{% url 'topics:question_detail' test.id question.get_next.id %}" method="post">
+              {% csrf_token %}
+                <h4> Вопрос : {{ question }}</h4>
+                <p> Варианты ответов: </p>
+                  {% for answer in question.answers.all %}
+                     <p><input type="radio" value={{answer}} name={{q}}/>{{ answer }}</p>
+                  {% endfor %}
+              {% endfor %}
+
+              <button id="kn_sl" onclick="sled_vopr();">Следующий вопрос</button>
+            </form>
+</body>
+</html>
+
+
+  <a href="{% url 'topics:question_detail' test.id question.id %}">Начать тест </a>
+
+
+            <form action="{% url 'topics:question_detail' test.id question.id %}" method="post">
+              {% csrf_token %}
+                <h4> Вопрос : {{ question }}</h4>
+                <p> Варианты ответов: </p>
+                  {% for answer in question.answers.all %}
+                     <p><input type="radio" value={{answer}} name={{q}}/>{{ answer }}</p>
+                  {% endfor %}
+
+              <button id="kn_sl" onclick="sled_vopr();">Следующий вопрос</button>
+            </form>
+
+      <ul>
+        <p> Вопрос: {{ question }}</p>
+        <p> Варианты ответов: </p>
+          {% for answer in question.answers.all %}
+             <p><input type="radio" value={{answer}} name={{q}}/>{{ answer }}</p>
+          {% endfor %}
+          <br>
+        <a href= "{% url 'topics:question_detail' question.get_next.id %}"> Cледующий вопрос </a>
+      </ul>
+
+<a href= "{% url 'topics:question_detail' question.get_next.id %}"> next chapter </a>
+
+
+
+              <form action="{% url 'topics:question_detail' question.id %}" method="post">
+              {% csrf_token %}
+                <h4> Вопрос : {{ current_question }}</h4>
+                <p> Варианты ответов: </p>
+                  {% for answer in current_question.answers.all %}
+                     <p><input type="radio" value={{answer}} name={{q}}/>{{ answer }}</p>
+                  {% endfor %}
+              <button id="kn_sl" onclick="sled_vopr();">Следующий вопрос</button>
+              <a href= "{% url 'topics:question_detail' current_question.get_next.id %}"> Cледующий вопрос </a>
+            </form>
+
+
+
+                <h4> Вопрос : {{ current_question }}</h4>
+                <p> Варианты ответов: </p>
+                  {% for answer in current_question.answers.all %}
+                     <p><input type="radio" value={{answer}} name={{q}}/>{{ answer }}</p>
+                  {% endfor %}
+              <a href= "{% url 'topics:question_detail' current_question.get_next.id %}"> Cледующий вопрос </a>
+
+
+              <a href= "{% url 'topics:question_detail' test.id question.id %}"> Cледующий вопрос </a>
+
+              <form action="{% url 'topics:question_detail' test.id question.get_next.id %}" method="post">
+                  {% csrf_token %}
+                    <h4> Вопрос : {{ question }}</h4>
+                    <p> Варианты ответов: </p>
+                      {% for answer in question.answers.all %}
+                         <p><input type="radio" value={{answer}} name={{q}}/>{{ answer }}</p>
+                      {% endfor %}
+                  <button id="kn_sl" onclick="sled_vopr();">Следующий вопрос</button>
+              </form>

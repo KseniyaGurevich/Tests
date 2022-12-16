@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ test.name }}</title>
+</head>
+<body>
+  <div>
+      <ul>
+          <h4>{{ test.name }}</h4>
+      </ul>
+
+      <ul>
+          <form action="{% url 'topics:question_detail' test.id question.get_next.id %}" method="post">
+            {% csrf_token %}
+             <p>Вопрос: {{ question }}</p>
+              <p>Варианты ответов:</p>
+              {% for answer in question.answers.all %}
+                <p><input type="radio" value={{answer}} name={{q}}/>{{ answer }}</p>
+              {% endfor %}
+             <button id="kn_sl" onclick="sled_vopr();">Следующий вопрос</button>
+          </form>
+      </ul>
+  </div>
+</body>
+</html>
