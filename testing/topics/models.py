@@ -5,6 +5,9 @@ from django.urls import reverse
 User = get_user_model()
 
 
+
+
+
 class Group(models.Model):
     title = models.CharField(max_length=50, verbose_name='Название группы тестов')
     description = models.CharField(max_length=50, verbose_name='Описание группы')
@@ -27,11 +30,6 @@ class Test(models.Model):
         on_delete=models.SET_NULL,
         related_name='groups',
     )
-    # questions = models.ManyToManyField(
-    #     Question,
-    #     #through='TestQuestion',
-    #     #related_name='test_questions'
-    # )
 
     def __str__(self) -> str:
         return self.name
@@ -50,10 +48,6 @@ class Question(models.Model):
         related_name='tests',
     )
     name = models.TextField(verbose_name='Вопрос')
-    # answer = models.ManyToManyField(
-    #     Answer,
-    #     through='QuestionAnswer',
-    #     related_name='answer1')
 
     def __str__(self) -> str:
         return self.name
@@ -65,9 +59,6 @@ class Question(models.Model):
 
     def get_next(self):
         return Question.objects.filter(id__gt=self.id).order_by('id').first()
-
-    # def get_absolute_url(self):
-    #     return reverse('topics:test_detail', args=[str(self.id)])
 
     class Meta:
         ordering = ['id']
@@ -144,3 +135,20 @@ class QuestionAnswer(models.Model):
     class Meta:
         verbose_name_plural = 'Создать тест (вопросы и ответы)'
 
+
+class UserTest(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='user',
+        verbose_name='Пользователь',
+    )
+    test = models.ForeignKey(
+        Test,
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name='user_tests',
+    )
+    right_answers = models.IntegerField(default=0)
+    wrong_answers = models.IntegerField(default=0)

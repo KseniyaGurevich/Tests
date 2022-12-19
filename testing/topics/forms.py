@@ -8,9 +8,11 @@ class TestForm(forms.ModelForm):
         fields = ('name', 'group')
 
 
-class AnswerForm(forms.ModelForm):
-    class Meta:
-        model = Answer
-        fields = ('name', 'question', 'check')
-        readonly_fields = ('name', )
+class AnswerForm(forms.Form):
+    answer_check = forms.BooleanField(required=False)
 
+    def clean_post(self):
+        data = self.cleaned_data['answer_check']
+        if data is False:
+            raise forms.ValidationError('Выберите один вили несколько вариантов ответа')
+        return data

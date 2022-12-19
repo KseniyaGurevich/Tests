@@ -32,17 +32,3 @@ class AnswerAdmin(admin.ModelAdmin):
     list_editable = ('name', 'question', 'check')
     list_filter = ('question__name',)
     search_fields = ('name',)
-
-
-# @admin.register(TestQuestion)
-# class TestQuestionAdmin(admin.ModelAdmin):
-#     list_display = ('pk', 'test', 'question')
-#     list_editable = ('test', 'question')
-#     search_fields = ('name',)
-
-
-# @admin.register(QuestionAnswer)
-# class QuestionAnswerAdmin(admin.ModelAdmin):
-#     list_display = ('pk', 'test', 'question', 'answer', 'check')
-#     list_editable = ('test', 'question', 'answer', 'check')
-#     search_fields = ('test__name',)

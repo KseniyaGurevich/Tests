@@ -11,15 +11,18 @@
       </ul>
 
       <ul>
-          <form action="{% url 'topics:question_detail' test.id question.get_next.id %}" method="post">
-            {% csrf_token %}
-             <p>Вопрос: {{ question }}</p>
-              <p>Варианты ответов:</p>
-              {% for answer in question.answers.all %}
-                <p><input type="radio" value={{answer}} name={{q}}/>{{ answer }}</p>
-              {% endfor %}
-             <button id="kn_sl" onclick="sled_vopr();">Следующий вопрос</button>
-          </form>
+          {% if error_message %}<p><strong>{{ error_message }}</strong></p> {% endif %}
+              <form action="{% url 'topics:question_detail' test.id question.get_next.id %}" method="post">
+              {% csrf_token %}
+                     <p>Вопрос: {{ question.name }}</p>
+                      <p>Варианты ответов:</p>
+                      {% for answer in question.answers.all %}
+
+                        <p><input type="checkbox" value={{answer.name}} name="check">{{ answer.name }}</p>
+                      {% endfor %}
+                  <input type="submit" value="Следующий вопрос">
+
+              </form>
       </ul>
   </div>
 </body>
