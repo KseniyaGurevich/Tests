@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ test.name }}</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}{{ test.name }}{% endblock %}
+{% block content %}
+{% load user_filters %}
   <div>
       <ul>
           <h3>{{ test.name }}</h3>
@@ -13,5 +10,4 @@
           <h2><a href="{% url 'topics:question_detail' test.id question.id %}"> Начать тест </a></h2>
       </ul>
   </div>
-</body>
-</html>
+{% endblock %}

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Group, Test, Question, Answer, QuestionAnswer
+from .models import Group, Test, Question, Answer
 
 
 @admin.register(Test)

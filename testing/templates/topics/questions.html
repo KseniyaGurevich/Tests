@@ -1,26 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ test.name }}</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}{{ test.name }}{% endblock %}
+{% block content %}
+{% load user_filters %}
   <div>
       <ul>
-          <h3>{{ test.name }}</h3>
-          <h3>{{ test.id }}</h3>
+          <h4>{{ test.name }}</h4>
       </ul>
 
       <ul>
-                <h4> Вопрос : {{ object }}</h4>
+          {% if error_message %}<p><strong>{{ error_message }}</strong></p> {% endif %}
+              <form action="{% url 'topics:question_detail' test.id question.get_next.id %}" method="post">
+              {% csrf_token %}
+                     <p>Вопрос: {{ question.name }}</p>
+                      <p>Варианты ответов:</p>
+                      {% for answer in question.answers.all %}
 
-                <p> Варианты ответов: </p>
-                  {% for answer in object.answers.all %}
-                     <p><input type="checkbox" name={{q}} value={{answer}}>{{ answer }}</p>
-                  {% endfor %}
-          <a href= "{% url 'topics:question_detail' test.id object.id %}"> Cледующий вопрос </a>
+                        <p><input type="checkbox" value={{answer.name}} name="check">{{ answer.name }}</p>
+                      {% endfor %}
+                  <input type="submit" value="Следующий вопрос">
 
+              </form>
       </ul>
   </div>
-</body>
-</html>
+{% endblock %}

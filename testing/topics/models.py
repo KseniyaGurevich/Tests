@@ -83,59 +83,6 @@ class Answer(models.Model):
         verbose_name_plural = 'Ответы'
 
 
-class TestQuestion(models.Model):
-    question = models.ForeignKey(
-        Question,
-        blank=True,
-        null=True,
-        on_delete=models.SET_NULL,
-    )
-    test = models.ForeignKey(
-        Test,
-        blank=True,
-        null=True,
-        on_delete=models.SET_NULL,
-    )
-
-    def __str__(self) -> str:
-        return f'{self.question}'
-
-    class Meta:
-        verbose_name = 'Тест-вопрос'
-        verbose_name_plural = 'Тесты-вопросы'
-
-
-class QuestionAnswer(models.Model):
-    test = models.ForeignKey(
-        Test,
-        blank=True,
-        null=True,
-        on_delete=models.SET_NULL,
-        related_name='test'
-    )
-    question = models.ForeignKey(
-        Question,
-        blank=True,
-        null=True,
-        on_delete=models.SET_NULL,
-        related_name='question'
-    )
-    answer = models.ForeignKey(
-        Answer,
-        blank=True,
-        null=True,
-        on_delete=models.SET_NULL,
-        related_name='answer'
-    )
-    check = models.BooleanField(default=False, verbose_name="Правильный ответ")
-
-    def __str__(self) -> str:
-        return f'{self.question}'
-
-    class Meta:
-        verbose_name_plural = 'Создать тест (вопросы и ответы)'
-
-
 class UserTest(models.Model):
     user = models.ForeignKey(
         User,

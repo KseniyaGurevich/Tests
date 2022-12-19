@@ -1,11 +1,8 @@
 from django.core.paginator import Paginator
-from django.db.models import Count
-from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import DetailView, ListView
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
-from .models import Test, Group, Question, QuestionAnswer, TestQuestion, Answer, UserTest
-from .forms import AnswerForm
+from .models import Test, Group, Question, UserTest
 NUMBER_OF_POSTS: int = 10
 
 
@@ -35,7 +32,7 @@ def test_detail(request, test_id):
 
 @login_required
 def question_detail(request, test_id, question_id):
-    template = 'topics/questions2.html'
+    template = 'topics/questions.html'
     test = get_object_or_404(Test, id=test_id)
     question_ids = Question.objects.filter(test_id=test.id).values_list('id', flat=True)
     if question_id in question_ids:

@@ -1,15 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Result</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}Результат{% endblock %}
+{% block content %}
+{% load user_filters %}
 <ul>
     Правильных ответов: {{ result.right_answers }}
 </ul>
 <ul>
     Неправильных ответов: {{ result.wrong_answers }}
 </ul>
-</body>
-</html>
+{% endblock %}
